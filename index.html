@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature Morph - Image Carousel</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS to set black background and additional styling */
+        body {
+            background-color: #000;
+            color: #fff;
+            height: 100vh; /* 100% of the viewport height */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+
+        #navbar {
+            background-color: #333;
+        }
+
+        #content {
+            margin-left: 25%; /* Adjust margin to accommodate the sidebar width */
+            padding: 20px;
+        }
+
+        .card {
+            background-color: transparent; /* Transparent background for the card */
+        }
+
+        #imageCarousel {
+            max-width: 50%; /* Full width */
+            max-height: 60vh; /* 60% of the viewport height */
+        }
+
+        /* Style the header and authors */
+        h1, h2 {
+            color: #fff;
+        }
+
+        /* Style the images to fit within the constrained dimensions */
+        #imageCarousel .carousel-inner .carousel-item img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div id="navbar">
+    <!-- Navigation Links -->
+    <ul class="nav justify-content-center">
+        <li class="nav-item"><h3>Version Builds</h3></li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://dattpatel99.github.io/NatureMorph/PairPrototypes">Initial</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://dattpatel99.github.io/NatureMorph/PreAlphaCheck">PreAlpha</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://dattpatel99.github.io/NatureMorph/Alpha">Alpha</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://dattpatel99.github.io/NatureMorph/PreBetaCheck">PreBeta</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://dattpatel99.github.io/NatureMorph/Gold">Gold</a>
+        </li>
+    </ul>
+</div>
+
+<div id="content">
+    <!-- Card with Carousel and Information -->
+    <div class="card ">
+        <div class="card-header justify-content-center">
+            <!-- Carousel -->
+            <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Images will be dynamically loaded from a JSON file -->
+                </div>
+                <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <!-- Header and Authors -->
+            <h1 class="mt-4">Nature Morph</h1>
+            <h2>Authors</h2>
+            <p>Eli, Datt, Shriya, Paul, Adam</p>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript to Load Images from JSON -->
+<script>
+    // JSON data with image URLs
+    var imageData = [
+        { src: 'images/image1.png', alt: 'Image 1' },
+        { src: 'images/thumbnail.png', alt: 'Image 2' },
+        // Add more image objects here
+    ];
+
+    // Function to dynamically load images into the carousel
+    function loadImages() {
+        var carouselInner = document.querySelector('.carousel-inner');
+        var carouselItems = '';
+
+        imageData.forEach(function (image, index) {
+            var activeClass = index === 0 ? 'active' : '';
+            carouselItems += `
+                <div class="carousel-item ${activeClass}">
+                    <img src="${image.src}" alt="${image.alt}" class="d-block w-100">
+                </div>
+            `;
+        });
+
+        carouselInner.innerHTML = carouselItems;
+    }
+
+    // Call the loadImages function to populate the carousel
+    loadImages();
+</script>
+
+</body>
+</html>
